@@ -763,3 +763,8 @@ def scale_by_spec_rad(mat: np.ndarray, rho: float = 0.8) -> Tuple[np.ndarray, fl
     if original_spec_rad > 1e-10:
         return mat / original_spec_rad * rho, rho / original_spec_rad
     return mat, 0
+
+
+if __name__ == "__main__":
+    plot_mip_er_w_time_n_spec_rad()
+    plot_mip_from_csv()

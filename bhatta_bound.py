@@ -2,7 +2,12 @@
 from typing import List
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
+mpl.rcParams['text.usetex'] = True
+mpl.rcParams['text.latex.preamble'] = r'''
+\usepackage{amsmath}
+'''
 plt.style.use("ggplot")
 
 
@@ -37,12 +42,8 @@ def check_anti_triangle():
     return True
 
 
-def check_avg_bc_vs_bc_avg():  # pylint: disable=too-many-locals
-    """Checks an inequality.
-
-    Checks if BC bound on the marginal distributions is better than
-    the average BC bound.
-    """
+def err_bounds_dirichlet():  # pylint: disable=too-many-locals
+    """Plots error bounds for Dirichlet experiments."""
     bc_sq_on_marginal_list = []
     avg_bc_sq_list = []
     avg_bc_list = []
@@ -101,11 +102,11 @@ def check_avg_bc_vs_bc_avg():  # pylint: disable=too-many-locals
     )
     plt.plot(curves[:, 0], label=r"$\mathsf{LB}_{\mathrm{direct}}$")
     plt.plot(curves[:, 1], label=r"$p_e^{\mathrm{opt}}$")
-    plt.plot(curves[:, 2], label=r"$\mathsf{LB}_{\mathrm{side-info}}$")
+    plt.plot(curves[:, 2], label=r"$\mathsf{LB}_{\text{side-info}}$")
     plt.legend(loc="best")
     plt.xlabel("trial")
     plt.ylabel("error probability")
-    plt.savefig("../figures/conjecture-d2-n10.eps")
+    plt.savefig("conjecture-d2-n10.eps")
 
 
 def check_conjecture_special():
@@ -149,7 +150,7 @@ def check_conjecture_special():
     plt.legend(loc="upper left")
     plt.xlabel("trial")
     plt.ylabel("terms in summation")
-    plt.savefig("../figures/conjecture-special.eps")
+    plt.savefig("conjecture-special.eps")
     return True
 
 
@@ -267,7 +268,7 @@ def check_conjecture_higher_dim(  # pylint: disable=too-many-branches
     plt.xlabel("trial")
     plt.ylabel("Bhattacharyya coefficient")
     plt.savefig(
-        "../figures/conjecture-d{}-n{}-nst{}.eps".format(
+        "conjecture-d{}-n{}-nst{}.eps".format(
             num_switch_vals, num_vals, no_small_terms
         )
     )
@@ -396,7 +397,7 @@ def auc_bound(rho: float, points: int) -> float:
     Returns:
         New upper bound on AUC.
     """
-    return np.mean(new_roc_bound(rho ** 2, np.linspace(0, 1, points))[:-1])
+    return np.mean(new_roc_bound([rho ** 2], np.linspace(0, 1, points))[:-1])
 
 
 def new_roc_bound(rho_sq_list: List[float], fpr: List[float]) -> np.ndarray:
@@ -457,7 +458,7 @@ def compare_auc_bounds(points: int) -> None:
     plt.legend()
     plt.xlabel(r"$\rho$")
     plt.ylabel("upper bound on AUC")
-    plt.savefig("../figures/auc_bound.eps")
+    plt.savefig("auc_bound.eps")
 
 
 def nonconcavity():
@@ -503,4 +504,4 @@ def bhatta_coeff(f: np.ndarray, g: np.ndarray) -> float:  # pylint: disable=inva
 
 
 if __name__ == "__main__":
-    check_avg_bc_vs_bc_avg()
+    err_bounds_dirichlet()
