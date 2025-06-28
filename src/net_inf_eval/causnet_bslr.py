@@ -1,7 +1,4 @@
-"""CausNet network reconstruction algorithms.
-
-This module is maintained in the CausNet package.
-"""
+"""CausNet network reconstruction algorithms."""
 
 import itertools
 
