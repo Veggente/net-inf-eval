@@ -1,14 +1,12 @@
 """Calculates Bhattacharyya coefficients for a network."""
 
-from typing import Tuple
-
 import matplotlib.pyplot as plt
 import numpy as np
 
 from net_inf_eval import sampcomp
 
 
-def er_bc() -> Tuple[float, float]:
+def er_bc() -> tuple[float, float]:
     """Calculates Bhattacharyya coefficient for 2x2 ER graphs.
 
     Returns:
@@ -31,7 +29,7 @@ def spectral_radius(mat: np.ndarray) -> float:
     return max(abs(np.linalg.eig(mat)[0]))
 
 
-def perturb(mat: np.ndarray, pos: Tuple[int, int], val: int, rho: float) -> np.ndarray:
+def perturb(mat: np.ndarray, pos: tuple[int, int], val: int, rho: float) -> np.ndarray:
     """Perturbs the integer matrix by one entry and scales.
 
     Args:
@@ -57,12 +55,12 @@ def perturb(mat: np.ndarray, pos: Tuple[int, int], val: int, rho: float) -> np.n
 
 def bc_4_perturbation(
     signed_graph: np.ndarray,
-    pos: Tuple[int, int],
+    pos: tuple[int, int],
     rho: float,
     num_trans: int,
     stationary: bool = True,
     obs_noise: float = 0,
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
     """Calculates BC for single-entry perturbation.
 
     Args:

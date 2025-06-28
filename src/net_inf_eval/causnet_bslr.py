@@ -4,25 +4,22 @@ This module is maintained in the CausNet package.
 """
 
 import itertools
-from typing import List
-from typing import Tuple
-from typing import Union
 
 import numpy as np
 import scipy.stats
 
 
 def bslr(  # pylint: disable=too-many-arguments
-    data_cell: List[np.ndarray],
+    data_cell: list[np.ndarray],
     num_time_lags: int,
     max_in_degree: int,
     significance_level: float,
     self_reg: bool = False,
     standard: bool = False,
-) -> Union[
-    Tuple[List[List[int]], List[List[int]]],
-    Tuple[List[List[int]], List[List[int]], List[List[float]]],
-]:
+) -> (
+    tuple[list[list[int]], list[list[int]]]
+    | tuple[list[list[int]], list[list[int]], list[list[float]]]
+):
     """Basic sparse linear regression.
 
     Args:
@@ -274,7 +271,7 @@ def lsa(regressand, regressor):
     return coeff, residual
 
 
-def standardize(data_cell: List[np.ndarray]) -> List[np.ndarray]:
+def standardize(data_cell: list[np.ndarray]) -> list[np.ndarray]:
     """Time-dependent standardization.
 
     TODO: Use standardize_arr() instead.

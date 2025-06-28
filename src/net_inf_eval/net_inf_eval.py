@@ -5,11 +5,6 @@ import json
 from itertools import product
 from typing import Any
 from typing import Callable
-from typing import Dict
-from typing import List
-from typing import Optional
-from typing import Tuple
-from typing import Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,13 +24,13 @@ def recreate_stb_single(  # pylint: disable=too-many-locals, too-many-arguments,
     num_genes: int = 200,
     prob_conn: float = 0.05,
     num_times: int = 2000,
-    lasso: Optional[List[float]] = None,
-    alpha: Optional[List[float]] = None,
+    lasso: list[float] | None = None,
+    alpha: list[float] | None = None,
     bhatta: bool = False,
     spec_rad: float = 0.8,
     average_bc2: bool = True,
     **kwargs,
-) -> Tuple[Dict[str, Dict[float, Dict[str, int]]], Union[Optional[float], List[float]]]:
+) -> tuple[dict[str, dict[float, dict[str, int]]], float | list[float] | None]:
     """Recreates a single simulation in Sun–Taylor–Bollt.
 
     Args:
@@ -136,9 +131,7 @@ def recreate_stb_single(  # pylint: disable=too-many-locals, too-many-arguments,
 
 def recreate_stb_multiple(
     bhatta: bool, sims: int = 20, average_bc2: bool = True, **kwargs
-) -> Tuple[
-    Dict[str, Dict[float, Dict[str, float]]], Union[Optional[float], List[float]]
-]:
+) -> tuple[dict[str, dict[float, dict[str, float]]], float | list[float] | None]:
     """Recreates error estimates in Sun–Taylor–Bollt.
 
     Args:
@@ -196,7 +189,7 @@ def recreate_stb_multiple(
 
 def recreate_plot_stb(  # pylint: disable=too-many-arguments, too-many-branches
     saveas: str,
-    spec_rad_arr: List[float],
+    spec_rad_arr: list[float],
     plot: bool = True,
     from_file: str = "",
     bhatta: bool = False,
@@ -278,9 +271,9 @@ def recreate_plot_stb(  # pylint: disable=too-many-arguments, too-many-branches
 
 
 def plot_roc(
-    errors: Dict[float, Dict[str, Dict[float, Dict[str, float]]]],
+    errors: dict[float, dict[str, dict[float, dict[str, float]]]],
     saveas: str,
-    bc2_dict: Optional[Dict[float, Union[float, List[float]]]] = None,
+    bc2_dict: dict[float, float | list[float]] | None = None,
     tight_bound: bool = False,
 ) -> None:
     """Plots ROC curves.
@@ -363,7 +356,7 @@ def gen_lin_gaussian(
     return data + np.sqrt(obs_noise) * np.random.randn(num_times, num_genes)
 
 
-def get_errors(decision: np.ndarray, truth: np.ndarray) -> Tuple[int, int, int, int]:
+def get_errors(decision: np.ndarray, truth: np.ndarray) -> tuple[int, int, int, int]:
     """Get inference errors.
 
     The false negative ratio is defined as
@@ -392,7 +385,7 @@ def get_errors(decision: np.ndarray, truth: np.ndarray) -> Tuple[int, int, int, 
     return fn_counter, positive, fp_counter, negative
 
 
-def filter_kwargs(kwargs: Dict[str, Any], func: Callable) -> Dict[str, Any]:
+def filter_kwargs(kwargs: dict[str, Any], func: Callable) -> dict[str, Any]:
     """Filter keyword arguments for a function."""
     return {
         key: value
