@@ -1,11 +1,17 @@
 """Calculates sample complexity of network reconstruction."""
-from typing import Tuple, Optional, Union, List
+
 import time
-import numpy as np
+from typing import List
+from typing import Optional
+from typing import Tuple
+from typing import Union
+
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.stats import rv_discrete
 
 plt.style.use("ggplot")
+_ONE_SHOT_STR = {True: "one-shot", False: "multi-shot"}
 
 
 class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
@@ -50,7 +56,7 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
             np.log(2 * self.prob_error) / np.log(rho),
         )
 
-    def sim_er_genie_bhatta_lb(  # pylint: disable=too-many-arguments, too-many-locals, too-many-branches, too-many-statements
+    def sim_er_genie_bhatta_lb(
         self,
         num_genes: int,
         prob_conn: float,
@@ -342,7 +348,7 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
         Returns:
             Upper bound.
         """
-        return rho ** num_cond / 2
+        return rho**num_cond / 2
 
 
 def cov_mat_small(  # pylint: disable=too-many-arguments
@@ -466,17 +472,16 @@ def plot_bounds(sigma_te_sq=0, saveas="bhatta_bound.eps", start_delta=0.1, diago
             lower_bounds[one_shot].append(lower)
             upper_bounds[one_shot].append(upper)
     plt.figure()
-    one_shot_str = lambda x: "one-shot" if x else "multi-shot"
     for one_shot in [True, False]:
         plt.plot(
             delta_array,
             lower_bounds[one_shot],
-            label=one_shot_str(one_shot) + ", lower bound",
+            label=_ONE_SHOT_STR[one_shot] + ", lower bound",
         )
         plt.plot(
             delta_array,
             upper_bounds[one_shot],
-            label=one_shot_str(one_shot) + ", upper bound",
+            label=_ONE_SHOT_STR[one_shot] + ", upper bound",
         )
     plt.legend()
     plt.xlabel(r"$\Delta$")
