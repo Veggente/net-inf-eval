@@ -1,13 +1,17 @@
 """Calculations related to the Bhattacharyya bounds."""
-from typing import List
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
 
-mpl.rcParams['text.usetex'] = True
-mpl.rcParams['text.latex.preamble'] = r'''
+from typing import List
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+
+mpl.rcParams["text.usetex"] = True
+mpl.rcParams[
+    "text.latex.preamble"
+] = r"""
 \usepackage{amsmath}
-'''
+"""
 plt.style.use("ggplot")
 
 
@@ -268,9 +272,7 @@ def check_conjecture_higher_dim(  # pylint: disable=too-many-branches
     plt.xlabel("trial")
     plt.ylabel("Bhattacharyya coefficient")
     plt.savefig(
-        "conjecture-d{}-n{}-nst{}.eps".format(
-            num_switch_vals, num_vals, no_small_terms
-        )
+        "conjecture-d{}-n{}-nst{}.eps".format(num_switch_vals, num_vals, no_small_terms)
     )
     return True
 
@@ -397,7 +399,7 @@ def auc_bound(rho: float, points: int) -> float:
     Returns:
         New upper bound on AUC.
     """
-    return np.mean(new_roc_bound([rho ** 2], np.linspace(0, 1, points))[:-1])
+    return np.mean(new_roc_bound([rho**2], np.linspace(0, 1, points))[:-1])
 
 
 def new_roc_bound(rho_sq_list: List[float], fpr: List[float]) -> np.ndarray:
@@ -448,9 +450,9 @@ def compare_auc_bounds(points: int) -> None:
         Plots figure of Shapiro bound and ours.
     """
     rho = np.linspace(0, 1, 101)
-    shapiro = 1 - (1 - np.sqrt(1 - rho ** 2)) ** 2 / 2
+    shapiro = 1 - (1 - np.sqrt(1 - rho**2)) ** 2 / 2
     ours = [auc_bound(this_rho, points) for this_rho in rho]
-    ours_weaker = 1 - rho ** 4 / 6
+    ours_weaker = 1 - rho**4 / 6
     plt.figure()
     plt.plot(rho, shapiro, label="Shapiro's bound")
     plt.plot(rho, ours, label="our tighter, numerical bound")

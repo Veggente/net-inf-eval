@@ -1,5 +1,8 @@
 """The lasso algorithm."""
-from typing import List, Tuple
+
+from typing import List
+from typing import Tuple
+
 import numpy as np
 from sklearn.linear_model import Lasso
 

@@ -1,16 +1,25 @@
 """Network inference performance evaluation."""
-from typing import Tuple, Dict, Any, Callable, Optional, List, Union
+
 import inspect
 import json
 from itertools import product
-import numpy as np
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Tuple
+from typing import Union
+
 import matplotlib.pyplot as plt
+import numpy as np
 from tqdm import tqdm
-import sampcomp
-import causnet_bslr
-from lasso import lasso_grn
-import network_bc
-import bhatta_bound
+
+from net_inf_eval import bhatta_bound
+from net_inf_eval import causnet_bslr
+from net_inf_eval import network_bc
+from net_inf_eval import sampcomp
+from net_inf_eval.lasso import lasso_grn
 
 plt.style.use("ggplot")
 
@@ -25,7 +34,7 @@ def recreate_stb_single(  # pylint: disable=too-many-locals, too-many-arguments,
     bhatta: bool = False,
     spec_rad: float = 0.8,
     average_bc2: bool = True,
-    **kwargs
+    **kwargs,
 ) -> Tuple[Dict[str, Dict[float, Dict[str, int]]], Union[Optional[float], List[float]]]:
     """Recreates a single simulation in Sun–Taylor–Bollt.
 
@@ -61,7 +70,7 @@ def recreate_stb_single(  # pylint: disable=too-many-locals, too-many-arguments,
                         (i, j),
                         spec_rad,
                         num_times - 1,
-                        **filter_kwargs(kwargs, network_bc.bc_4_perturbation)
+                        **filter_kwargs(kwargs, network_bc.bc_4_perturbation),
                     )
                 )
                 ** 2
@@ -93,7 +102,7 @@ def recreate_stb_single(  # pylint: disable=too-many-locals, too-many-arguments,
                 data_cell,
                 100,
                 alpha=this_alpha,
-                **filter_kwargs(kwargs, causnet_bslr.ocse)
+                **filter_kwargs(kwargs, causnet_bslr.ocse),
             )
             full_network = np.zeros((num_genes, num_genes))
             for j in range(num_genes):
@@ -192,7 +201,7 @@ def recreate_plot_stb(  # pylint: disable=too-many-arguments, too-many-branches
     from_file: str = "",
     bhatta: bool = False,
     tight_bound: bool = False,
-    **kwargs
+    **kwargs,
 ) -> None:
     """Recreates error plots.
 

@@ -2,8 +2,12 @@
 
 This module is maintained in the CausNet package.
 """
-from typing import List, Union, Tuple
+
 import itertools
+from typing import List
+from typing import Tuple
+from typing import Union
+
 import numpy as np
 import scipy.stats
 
@@ -196,7 +200,7 @@ def granger(
                 phi, idx_gene, restricted_parents, self_reg
             )
             f_stat = (
-                (restricted_error ** 2 - errors[idx_gene][0] ** 2)
+                (restricted_error**2 - errors[idx_gene][0] ** 2)
                 / dof[0]
                 / (errors[idx_gene][0] ** 2)
                 * dof[1]
@@ -491,7 +495,7 @@ def sbl_grn(  # pylint: disable=too-many-locals
     sigma_eps=0.4,
     sigma_max_iter=10,
     sparsity_threshold=1,
-    **sbl_kargs
+    **sbl_kargs,
 ):
     """Sparse Bayesian learning algorithm for gene regulatory
     network reconstruction.

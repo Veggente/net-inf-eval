@@ -1,8 +1,11 @@
 """Calculates Bhattacharyya coefficients for a network."""
+
 from typing import Tuple
-import numpy as np
+
 import matplotlib.pyplot as plt
-import sampcomp
+import numpy as np
+
+from net_inf_eval import sampcomp
 
 
 def er_bc() -> Tuple[float, float]:
@@ -58,7 +61,7 @@ def bc_4_perturbation(
     rho: float,
     num_trans: int,
     stationary: bool = True,
-    obs_noise: float = 0
+    obs_noise: float = 0,
 ) -> Tuple[float, float]:
     """Calculates BC for single-entry perturbation.
 
@@ -186,7 +189,7 @@ def er_3x3_avg(
             prob[1] = prob[0] * ternary_prob(j, prob_conn)
             for k in range(-1, 2):
                 prob[2] = prob[1] * ternary_prob(k, prob_conn)
-                for l in range(-1, 2):
+                for l in range(-1, 2):  # noqa: E741
                     prob[3] = prob[2] * ternary_prob(l, prob_conn)
                     for m in range(-1, 2):
                         prob[4] = prob[3] * ternary_prob(m, prob_conn)
