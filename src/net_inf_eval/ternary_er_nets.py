@@ -6,12 +6,18 @@ produces several plots related to the scaling of the networks:
         matrices differing in one edge
 """
 
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
+from config import Config
 from scipy.stats import rv_discrete
 from tqdm import tqdm
 
-from config import config
+config = Config(
+    "config-net-inf-eval.toml",
+    template_path=Path(__file__).parent / "config.toml.template",
+)
 
 
 def erdos_renyi(

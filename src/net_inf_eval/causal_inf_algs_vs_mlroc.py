@@ -7,18 +7,25 @@ recreate_stb_multiple() returns a dictionary with ROCs.
 import inspect
 import json
 from collections.abc import Callable
+from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
-from causal_recovery.causal_inf_mlroc_vs_info_bnds import roc_upbnd_genie_mle
-from causal_recovery.causnet_bslr import ocse
-from causal_recovery.lasso import lasso_grn
-from causal_recovery.ternary_er_nets import erdos_renyi_ternary
-from causal_recovery.ternary_er_nets import scale_by_spec_rad
-from config import config
+from config import Config
 from mleroc.roc import ROC
 from tqdm import tqdm
+
+from net_inf_eval.causal_inf_mlroc_vs_info_bnds import roc_upbnd_genie_mle
+from net_inf_eval.causnet_bslr import ocse
+from net_inf_eval.lasso import lasso_grn
+from net_inf_eval.ternary_er_nets import erdos_renyi_ternary
+from net_inf_eval.ternary_er_nets import scale_by_spec_rad
+
+config = Config(
+    "config-net-inf-eval.toml",
+    template_path=Path(__file__).parent / "config.toml.template",
+)
 
 
 def recreate_stb_single(

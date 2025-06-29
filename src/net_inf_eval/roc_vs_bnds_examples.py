@@ -7,13 +7,19 @@ is a two state Markov chain.    Used for two figures in appendix of paper.
 """
 
 import random
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-from config import config
+from config import Config
 from mleroc.estimators import MLE
 from mleroc.roc import ROC
 from scipy.stats import norm
+
+config = Config(
+    "config-net-inf-eval.toml",
+    template_path=Path(__file__).parent / "config.toml.template",
+)
 
 
 def binormal_roc(mu: float) -> ROC:

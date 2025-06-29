@@ -17,16 +17,24 @@ using the plugin method to rollout method.   There is excellent agreement
 giving confidence of correct implementation.
 """
 
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
-from causal_recovery.ternary_er_nets import asymptotic_cov_mat
-from causal_recovery.ternary_er_nets import erdos_renyi_ternary
-from causal_recovery.ternary_er_nets import scale_by_spec_rad
-from config import config
+from config import Config
 from mleroc.estimators import MLE
 from mleroc.roc import ROC
 from scipy.linalg import eigh
 from scipy.stats import multivariate_normal
+
+from net_inf_eval.ternary_er_nets import asymptotic_cov_mat
+from net_inf_eval.ternary_er_nets import erdos_renyi_ternary
+from net_inf_eval.ternary_er_nets import scale_by_spec_rad
+
+config = Config(
+    "config-net-inf-eval.toml",
+    template_path=Path(__file__).parent / "config.toml.template",
+)
 
 
 def big_covar_matrix(
