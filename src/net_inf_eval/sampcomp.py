@@ -1,10 +1,6 @@
 """Calculates sample complexity of network reconstruction."""
 
 import time
-from typing import List
-from typing import Optional
-from typing import Tuple
-from typing import Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -66,16 +62,16 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
         bayes: bool = True,
         stationary: bool = False,
         and_upper: bool = False,
-    ) -> Union[
-        Tuple[float, float],
-        Tuple[Tuple[float, float], Tuple[float, float]],
-        Tuple[
-            Tuple[float, float],
-            Tuple[float, float],
-            Tuple[float, float],
-            Tuple[float, float],
-        ],
-    ]:
+    ) -> (
+        tuple[float, float]
+        | tuple[tuple[float, float], tuple[float, float]]
+        | tuple[
+            tuple[float, float],
+            tuple[float, float],
+            tuple[float, float],
+            tuple[float, float],
+        ]
+    ):
         """Simulate genie-aided Bhattacharyya lower bound.
 
         Simulate ER graphs to get a genie-aided Bhattacharyya lower
@@ -222,7 +218,7 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
         num_sims: int,
         stationary: bool = False,
         **kwargs,
-    ) -> Tuple[float, float]:
+    ) -> tuple[float, float]:
         """Simulate average Bhattacharyya coefficient for ER graphs.
 
         Args:
@@ -288,8 +284,8 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
         return bhatta_stat
 
     def genie_hypotheses(  # pylint: disable=no-self-use
-        self, graph: np.ndarray, pos: Tuple[int, int], weight: float, spec_rad: float
-    ) -> Tuple[np.ndarray, np.ndarray]:
+        self, graph: np.ndarray, pos: tuple[int, int], weight: float, spec_rad: float
+    ) -> tuple[np.ndarray, np.ndarray]:
         """Generate genie-aided hypotheses.
 
         Args:
@@ -321,7 +317,7 @@ class NetworkHypothesisTesting:  # pylint: disable=too-many-instance-attributes
         return adj_mat_0, adj_mat_1
 
     def lower_bound_on_error_prob(  # pylint: disable=no-self-use
-        self, rho: float, num_cond: int, prior: Tuple[float, float] = (0.5, 0.5)
+        self, rho: float, num_cond: int, prior: tuple[float, float] = (0.5, 0.5)
     ) -> float:
         """Lower bound on average error probability.
 
@@ -361,7 +357,7 @@ def cov_mat_small(  # pylint: disable=too-many-arguments
     ridx1: int,
     ridx2: int,
     one_shot: bool,
-    initial: Optional[np.ndarray] = None,
+    initial: np.ndarray | None = None,
 ) -> np.ndarray:
     """Calculates small covariance matrix.
 
@@ -498,7 +494,7 @@ def gen_cov_mat(  # pylint: disable=too-many-arguments, too-many-locals
     one_shot: bool,
     sigma_te_sq: float,
     skip: int = 0,
-    initial: Optional[np.ndarray] = None,
+    initial: np.ndarray | None = None,
 ):
     """Generate covariance matrix.
 
@@ -556,7 +552,7 @@ def gen_cov_mat(  # pylint: disable=too-many-arguments, too-many-locals
 
 def erdos_renyi(
     num_genes: int, prob_conn: float, spec_rad: float = 0.8
-) -> Tuple[np.ndarray, float]:
+) -> tuple[np.ndarray, float]:
     """Initialize an Erdos Renyi network as in Sun–Taylor–Bollt 2015.
 
     If the spectral radius is positive, the matrix is normalized
@@ -579,7 +575,7 @@ def erdos_renyi(
 
 def asymptotic_cov_mat(
     initial: np.ndarray, adj_mat: np.ndarray, sigma_sq: float, num_iter: int
-) -> Tuple[np.ndarray, float]:
+) -> tuple[np.ndarray, float]:
     """Gets the asymptotic covariance matrix iteratively.
 
     Args:
@@ -602,7 +598,7 @@ def asymptotic_cov_mat(
     return last_cov_mat, difference
 
 
-def mip(sigma: np.ndarray, non_parent: int, parents: List[int]) -> float:
+def mip(sigma: np.ndarray, non_parent: int, parents: list[int]) -> float:
     """Calculates the mutual incoherence parameter.
 
     Args:
@@ -625,9 +621,9 @@ def mip_er(
     nodes: int,
     prob_conn: float,
     times: int,
-    rand_seed: Union[int, float] = 0,
+    rand_seed: int | float = 0,
     spec_rad: float = 0.8,
-) -> Tuple[float, int, int]:
+) -> tuple[float, int, int]:
     """Calculates the mutual incoherence parameter for an ER graph.
 
     TODO: Fix the error that the first return value may be 0-dim
@@ -754,7 +750,7 @@ def erdos_renyi_ternary(num_genes: int, prob_conn: float) -> np.ndarray:
     return signed_edge_dist.rvs(size=(num_genes, num_genes))
 
 
-def scale_by_spec_rad(mat: np.ndarray, rho: float = 0.8) -> Tuple[np.ndarray, float]:
+def scale_by_spec_rad(mat: np.ndarray, rho: float = 0.8) -> tuple[np.ndarray, float]:
     """Scales matrix by spectral radius.
 
     Args:

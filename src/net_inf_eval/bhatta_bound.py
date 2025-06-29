@@ -1,7 +1,5 @@
 """Calculations related to the Bhattacharyya bounds."""
 
-from typing import List
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,7 +13,7 @@ mpl.rcParams[
 plt.style.use("ggplot")
 
 
-def half_norm(vec: List[float]) -> float:
+def half_norm(vec: list[float]) -> float:
     """Half norm.
 
     Args:
@@ -375,7 +373,7 @@ def rho_bar(
     )
 
 
-def mix_prob(coin_prob: float, dist_a: List[float], dist_b: List[float]) -> List[float]:
+def mix_prob(coin_prob: float, dist_a: list[float], dist_b: list[float]) -> list[float]:
     """Mixes probability distributions.
 
     Args:
@@ -402,7 +400,7 @@ def auc_bound(rho: float, points: int) -> float:
     return np.mean(new_roc_bound([rho**2], np.linspace(0, 1, points))[:-1])
 
 
-def new_roc_bound(rho_sq_list: List[float], fpr: List[float]) -> np.ndarray:
+def new_roc_bound(rho_sq_list: list[float], fpr: list[float]) -> np.ndarray:
     """Calculates our new ROC upper bound.
 
     Args:

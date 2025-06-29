@@ -1,15 +1,12 @@
 """The lasso algorithm."""
 
-from typing import List
-from typing import Tuple
-
 import numpy as np
 from sklearn.linear_model import Lasso
 
 
 def lasso_grn(
-    data_cell: List[np.ndarray], alpha: float
-) -> Tuple[List[List[int]], List[List[int]]]:
+    data_cell: list[np.ndarray], alpha: float
+) -> tuple[list[list[int]], list[list[int]]]:
     """Lasso for GRN.
 
     Args:

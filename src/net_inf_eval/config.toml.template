@@ -1,0 +1,80 @@
+[paths]
+plots_dir = "./plots/"
+data_dir = "./data/"
+
+[ternary_er_nets]
+[[ternary_er_nets.histogram]]
+num_genes = 10
+prob_conn = 0.2
+sim = 100000
+
+[[ternary_er_nets.histogram]]
+num_genes = 10
+prob_conn = 0.5
+sim = 100000
+
+[[ternary_er_nets.histogram]]
+num_genes = 20
+prob_conn = 0.1
+sim = 100000
+
+[[ternary_er_nets.histogram]]
+num_genes = 20
+prob_conn = 0.2
+sim = 100000
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 10
+prob_conn = 0.2
+num_pairs = 100
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 10
+prob_conn = 0.4
+num_pairs = 100
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 100
+prob_conn = 0.2
+num_pairs = 100
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 100
+prob_conn = 0.4
+num_pairs = 100
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 1000
+prob_conn = 0.2
+num_pairs = 100
+
+[[ternary_er_nets.spectral_radius_vs_S]]
+num_genes = 1000
+prob_conn = 0.4
+num_pairs = 100
+
+[[ternary_er_nets.single_edge_change]]
+num_genes = 10
+prob_conn = 0.2
+num_pairs = 100
+
+[[ternary_er_nets.single_edge_change]]
+num_genes = 10
+prob_conn = 0.4
+num_pairs = 100
+
+[[ternary_er_nets.single_edge_change]]
+num_genes = 20
+prob_conn = 0.2
+num_pairs = 100
+
+[[ternary_er_nets.single_edge_change]]
+num_genes = 20
+prob_conn = 0.4
+num_pairs = 100
+
+[roc_algs_vs_mlroc]
+n_sims = 500
+
+[roc_mlroc_vs_info_bnds]
+n_sims = 500
